@@ -1,6 +1,7 @@
 function agendar() {
   let nome = document.getElementById("nome").value;
   let horario = document.getElementById("horario").value;
+  let telefoneCliente = document.getElementById("telefone").value;
 
   // validação
   if (nome === "" || horario === "") {
@@ -19,7 +20,8 @@ function agendar() {
   // salvar
   let agendamento = {
     nome: nome,
-    horario: horario
+    horario: horario,
+    telefone: telefoneCliente
   };
 
   let lista = JSON.parse(localStorage.getItem("agendamentos")) || [];
@@ -31,11 +33,11 @@ function agendar() {
   mostrarAgendamentos();
 
   // WhatsApp (FINAL)
-  let telefone = "5565993379779";
+  let telefoneDono = "5565993379779";
 
   let mensagem = `Olá, meu nome é ${nome} e gostaria de agendar um horário às ${horario}`;
 
-  let url = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
+  let url = `https://wa.me/${telefoneDono}?text=${encodeURIComponent(mensagem)}`;
 
   window.location.href = url;
 }
@@ -49,7 +51,7 @@ function mostrarAgendamentos() {
   lista.forEach(function(item, index) {
     let li = document.createElement("li");
 
-    li.innerText = item.nome + " - " + item.horario;
+    li.innerText = item.nome + " - " + item.horario + " - " + item.telefone
 
     let botao = document.createElement("button");
     botao.innerText = "Excluir";
